@@ -13,7 +13,7 @@
 
 ### bundle for deploy
 - run `npm run bundle` to package your code for deploy
-- find it in the `dist` folder
+- find it in the `build` folder
 
 ### IMPORTANT NOTE
 This project doesn't contains any configuration for code splitting and efficient bundling
