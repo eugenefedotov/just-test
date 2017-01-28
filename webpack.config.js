@@ -25,10 +25,6 @@ module.exports = {
     port: 3000
   },
   plugins: [
-    new CommonsChunkPlugin({
-      name: ['vendor']
-    }),
-
     new HtmlWebpackPlugin({
       template: './index.html',
       chunksSortMode: 'dependency'
