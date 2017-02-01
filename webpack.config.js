@@ -1,7 +1,6 @@
 'use strict';
 
 let webpack = require('webpack');
-let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 let path = require('path');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -17,17 +16,22 @@ module.exports = {
   },
   module  : {
     loaders : [
+      { test: /\.css$/, loader: "style!css" },
       { test: /\.js$/, exclude: /node_modules/, loader:"babel", query: { presets: ['es2015', 'stage-1'] } },
-      {test: /\.html$/, loader: 'raw'}
+      { test: /\.html$/, exclude: /node_modules/, loader:"html" },
     ]
-  },
-  devServer: {
-    port: 3000
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',
       chunksSortMode: 'dependency'
     })
-  ]
+  ],
+
+  devServer: {
+    contentBase: "./src",
+    noInfo: false,
+    hot: true,
+    port: 3000
+  }
 };
