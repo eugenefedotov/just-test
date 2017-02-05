@@ -1,0 +1,14 @@
+td { text-align: center; vertical-align: top; min-width: 6em; }
+.item-value {height: 6em; text-align: center; margin-top: 2em;}
+.model-value {font-size: 1.618em; }
+table table {
+  opacity: 0.9; font-size: 0.818em;
+  }
+table {
+  /*border-top: solid rgba(0,0,0,0.1) 0.15em;*/
+  }
+td {
+  background-color: rgba(0,0,0,0.1) ;
+  }
+input {font-size: 1em; width: 3em;}
+.basic_item {text-align: center;}

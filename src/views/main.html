@@ -1,0 +1,31 @@
+<script type="text/ng-template" id="table_pattern">
+  <tr>
+    <td ng-repeat="Model in Model.models">
+      <div ng-include="'item-value'"></div>
+      <table ng-include="'table_pattern'"></table>
+    </td>
+  </tr>
+</script>
+
+<script type="text/ng-template" id="item-value">
+  <div class="item-value">
+    <br/>
+    <span class="model-value">
+        <i ng-click="show_input=true" ng-hide="show_input">{{Model.Value}}</i>
+        <input type="number" ng-show="show_input" ng-model="Model.Value" ng-blur="show_input=false; main.changeEvaluation()"/>
+    </span>
+    <br/>
+    {{Model.Name}}
+    <br/>
+  </div>
+</script>
+
+<div>
+  <div ng-repeat="Model in main.model" class="basic_item">
+    <div ng-include="'item-value'"></div>
+    <table ng-include="'table_pattern'"></table>
+    <div style="text-align: center;">
+      <textarea style="width: 50%; height:20em;"></textarea>
+    </div>
+  </div>
+</div>
