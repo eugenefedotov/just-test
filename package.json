@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nirkaufman/angular-webpack-starter.git"
+    "url": "https://github.com/eugenefedotov/just-test.git"
   },
   "keywords": [
     "angularjs",
@@ -20,9 +20,6 @@
   ],
   "author": "Fedotov Eugene <fedotov.evgenii@gmail.com",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/nirkaufman/angular-webpack-starter/issues"
-  },
   "devDependencies": {
     "babel-core": "6.3.17",
     "babel-loader": "6.2.0",

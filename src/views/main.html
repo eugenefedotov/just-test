@@ -1,8 +1,8 @@
 <script type="text/ng-template" id="table_pattern">
   <tr>
-    <td ng-repeat="model in model.models">
-      <div ng-include="'item-value'"></div>
-      <table ng-include="'table_pattern'"></table>
+    <td data-ng-repeat="model in model.models">
+      <div data-ng-include="'item-value'"></div>
+      <table data-ng-include="'table_pattern'"></table>
     </td>
   </tr>
 </script>
@@ -11,8 +11,8 @@
   <div class="item-value">
     <br/>
     <span class="model-value">
-        <i ng-click="show_input=true" ng-hide="show_input">{{model.evaluation.value}}</i>
-        <input type="number" ng-show="show_input" ng-model="model.evaluation.value" ng-blur="show_input=false"/>
+        <i data-ng-click="show_input=true" data-ng-hide="show_input">{{model.evaluation.value}}</i>
+        <input type="number" data-ng-show="show_input" data-ng-model="model.evaluation.value" data-ng-blur="show_input=false; Main.updateEvaluation(model.id, model.evaluation.value)"/>
     </span>
     <br/>
     {{model.name}}
@@ -25,28 +25,28 @@
     <div class="form-horizontal">
       <br />
       <div class="form-group">
-        <textarea class="form-control" rows="7" data-ng-model="main.inputData" placeholder="Enter JSON data"></textarea>
+        <textarea class="form-control" rows="7" data-ng-model="Main.inputData" placeholder="Enter JSON data"></textarea>
       </div>
       <div class="form-group">
-        <input type="button" class="form-control" data-ng-click="main.createModel()" value="Create model"/>
+        <input type="button" class="form-control" data-ng-click="Main.createModel()" value="Create model"/>
       </div>
     </div>
   </div>
 </div>
 
 <div>
-  <div ng-repeat="model in main.models" class="basic_item">
-    <div ng-include="'item-value'"></div>
-    <table ng-include="'table_pattern'"></table>
+  <div data-ng-repeat="model in Main.models" class="basic_item">
+    <div data-ng-include="'item-value'"></div>
+    <table data-ng-include="'table_pattern'"></table>
     <div class="container">
       <div class="col-md-10 col-md-offset-1">
         <div>
           <br />
           <div class="form-group">
-            <textarea class="form-control" placeholder="Enter description" rows="7" data-ng-model="main.modelDscr"></textarea>
+            <textarea class="form-control" placeholder="Enter description" rows="7" data-ng-model="model.dscr">{{model.dscr}}</textarea>
           </div>
           <div class="form-group">
-            <input type="button" class="form-control" data-ng-click="main.createModel()" value="Save dscr"/>
+            <input type="button" class="form-control" data-ng-click="Main.updateDscr(model.id, model.dscr)" value="Save dscr"/>
           </div>
         </div>
       </div>

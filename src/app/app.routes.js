@@ -10,7 +10,7 @@ export default function routesConfig($stateProvider, $urlRouterProvider) {
         'layout': {
           template: require('../views/main.html'),
           controller: 'MainCtrl',
-          controllerAs: 'main'
+          controllerAs: 'Main'
         }
       }
     });
