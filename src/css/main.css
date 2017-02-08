@@ -5,6 +5,7 @@ table table {
   opacity: 0.9; font-size: 0.818em;
   }
 table {
+  width: 100%;
   /*border-top: solid rgba(0,0,0,0.1) 0.15em;*/
   }
 td {
