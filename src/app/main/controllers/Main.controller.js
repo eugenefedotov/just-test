@@ -10,9 +10,8 @@ export default class MainCtrl {
     this.inputData = '';
     this.models = [];
 
-    this.data  = [
+    /*this.data  = [
       {
-        "_id":"123ab",
         "name":"model1",
         "dscr":"bla",
         "source":"123",
@@ -98,20 +97,19 @@ export default class MainCtrl {
       },
 
     ];
-    this.prepareData();
-    /*this.$just.mgoInterface
+    this.prepareData();*/
+    this.$just.mgoInterface
       .find()
       .then(res => {
         if (!res) {
           return;
         }
-        this.data = res;
-
-      });*/
+        this.prepareData(res);
+      });
   }
 
-  prepareData() {
-    this.data.forEach(item => {
+  prepareData(data) {
+    data.forEach(item => {
       let parents = {};
 
       item.models.forEach(innerItem => {
@@ -143,8 +141,6 @@ export default class MainCtrl {
         source : item.source,
         models : result
       });
-
-      console.log(this.models);
     });
   }
 
