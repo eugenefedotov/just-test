@@ -2,7 +2,7 @@
 
 import angular from 'angular';
 
-import SharedService from '../shared/services/Shared.service';
+import SharedService from '../shared/services/Shared.service.js';
 import AuthService from '../auth/services/Auth.service.js';
 import MainCtrl from './controllers/Main.controller.js';
 
