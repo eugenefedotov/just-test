@@ -3,7 +3,7 @@
 ### How to run:
 1. clone the project
 2. run `npm start`
-4. navigate to 'localhost/3000'
+4. navigate to 'localhost:3000'
 5. start developing your Angular app with ES6 (javascript 2015)
 
 ### what you get?
