@@ -17,6 +17,6 @@
 
 ### IMPORTANT NOTE
 This project doesn't contains any configuration for code splitting and efficient bundling
-for production. (when running `npm run bundle` it will bundle all of your code into one `bundle.js` file).
+for production. (when running `npm run bundle` it will bundle all of your code into one `main.js` file).
 The main purpose of this project is to get you up and running with your development environment only.
 Read more about how to configure webpack for production bundling and make your own choices.  
