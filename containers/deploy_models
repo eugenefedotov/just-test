@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+CONTAINER=models
+
+docker build -t friend/$CONTAINER models/ && (
+    docker rm -f $CONTAINER
+    docker run -itd --name $CONTAINER \
+        $ADDITIONAL_DOCKER_ARGS \
+        --restart=always \
+        -p 8087:80 \
+        -p 7000:7000 \
+        -v /opt/containers:/opt/containers:ro \
+        -v /opt/containers/$CONTAINER:/opt/containers/$CONTAINER \
+        -v /var/log/containers/$CONTAINER:/var/log \
+        -v /tmp/gits:/tmp/gits \
+        friend/$CONTAINER
+)

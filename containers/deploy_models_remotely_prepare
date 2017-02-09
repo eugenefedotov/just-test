@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mkdir -p ./models/root/app
+
+rsync -r --exclude='platforms' --exclude='plugins' --exclude='node_modules' --exclude='containers' --delete-excluded ../ ./models/root/app
