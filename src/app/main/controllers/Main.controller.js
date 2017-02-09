@@ -2,11 +2,23 @@
 
 export default class MainCtrl {
 
-  constructor($auth, $just, $scope) {
+  /**
+   *
+   * @param $auth Auth Service
+   * @param $just $just service
+   * @param $scope
+   * @param $sharedService Shared Service
+   * @param $alertService Alert Service using ngToast
+   */
+  constructor($auth, $just, $scope, $sharedService, $alertService) {
 
     $auth.authorization();
+
     this.$just = $just;
     this.$scope = $scope;
+    this.$sharedService = $sharedService;
+    this.$alertService = $alertService;
+    this.oldEvalVal = 1;
 
     this.inputData = '';
     this.models = [];
@@ -19,16 +31,20 @@ export default class MainCtrl {
         }
         this.prepareData(res);
         this.$scope.$digest();
-        console.log(this.models);
       });
   }
 
+  /**
+   * Prepare data for rendering
+   * @param {Object} data
+   */
   prepareData(data) {
     data.forEach(item => {
       let parents = {};
 
       item.models.forEach(innerItem => {
         parents[innerItem.name] = innerItem;
+        parents[innerItem.name].id = item._id;
         parents[innerItem.name].models = [];
       });
 
@@ -38,8 +54,9 @@ export default class MainCtrl {
         let name = names.pop();
         let path = names.join('.');
         if (path) {
-          innerItem.name = name;
-          parents[path].models.push(innerItem);
+          innerItem.shortName = name;
+          innerItem.id = item._id;
+          parents[path].models.push(innerItem)
         }
       }
 
@@ -60,29 +77,78 @@ export default class MainCtrl {
     });
   }
 
+  /**
+   * Create and record new model
+   */
   createModel() {
+
     /* need to add json schema validator */
     this.$just.mgoInterface
       .insert(JSON.parse(this.inputData))
       .then(res => {
-        this.$scope.$digest()
+        this.$alertService.success('New model created');
+        this.$scope.$apply();
       });
   }
 
-
-  updateDscr(model_id, model_dscr) {
+  /**
+   * Update description for model
+   * @param {Object} model
+   */
+  updateDscr(model) {
     this.$just.mgoInterface
       .update(
-        {"_id": model_id},
-        {$set: {"dscr": model_dscr} }
+        {"_id": model.id},
+        {$set: {"dscr": model.dscr} }
       )
       .then(res => {
-        console.log(res);
+        this.$alertService.success('Description updated');
+        this.$scope.$apply();
       })
   }
 
-  updateEvaluation(model_id, value) {
-    console.log(model_id, value);
+  /**
+   * Save old evaluation value for evaluations history
+   * @param {String} val
+   */
+  saveEvalValue(val) {
+    this.oldEvalVal = val;
+  }
+
+  /**
+   * Update evaluation
+   * @param {Object} model
+   */
+  updateEvaluation(model) {
+
+    let model_id  = model.id;
+    let oldEvaluation = {
+      date: model.evaluation.date,
+      value: this.oldEvalVal
+    };
+
+    delete(model.id);
+    delete(model.shortName);
+
+    model.evaluation.date = this.$sharedService.getFormatDate();
+    model.evaluation.evaluations.push(oldEvaluation);
+
+    if(model.evaluation.value > 10) {
+      model.evaluation.value = 10;
+    }
+    if(model.evaluation.value < 1) {
+      model.evaluation.value = 1;
+    }
+
+    this.$just.mgoInterface
+      .update(
+        {"_id": model_id, "models.name": model.name},
+        {$set: {"models.$": model}}
+      )
+      .then(res => {
+        this.$alertService.success('Evaluation updated');
+        this.$scope.$apply();
+      });
   }
 
 };

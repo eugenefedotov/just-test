@@ -2,14 +2,14 @@
 
 import angular from 'angular';
 
-import sharedService from '../shared/shared.module.js';
-import authModule from '../auth/auth.module.js';
+import sharedModule from '../shared/shared.module.js';
+import authModule from '../auth/auth.module';
 
 import MainCtrl from './controllers/Main.controller.js';
 
 export default angular
   .module('VisualizationOfModels.Main', [
-    sharedService,
+    sharedModule,
     authModule
   ])
   .controller('MainCtrl', MainCtrl)

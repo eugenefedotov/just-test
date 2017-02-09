@@ -4,9 +4,7 @@ export default function modelsValues() {
   return {
     restrict: 'E',
     replace: true,
-    scope: {
-      bla: '@'
-    },
+    scope: {},
     template: require('../../../views/directives/modelsValues.html')
   };
 };

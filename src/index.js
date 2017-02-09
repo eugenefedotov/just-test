@@ -4,6 +4,7 @@ import angularSanitize from 'angular-sanitize';
 import 'ng-toast';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import _ from 'lodash';
 
 import authModule from './app/auth/auth.module.js';
 import mainModule from './app/main/main.module.js';

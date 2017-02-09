@@ -13,3 +13,18 @@ td {
   }
 input {font-size: 1em; width: 3em;}
 .basic_item {text-align: center;}
+
+div.ng-toast {
+  position: fixed;
+  width: 90%;
+  left: 50%;
+  margin-left:-46%;
+  z-index: 1100;
+  }
+
+div.ng-toast ul {
+  list-style-type: none;
+  }
+div.ng-toast li {
+  text-align: center;
+  }

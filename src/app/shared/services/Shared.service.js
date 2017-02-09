@@ -1,8 +1,18 @@
 'use strict';
 
 export default class SharedUtils {
+
   constructor() {
-    /* need to add JSON SCHEMA Validation */
+
+  }
+
+  /**
+   * Formating date to format yyyy-mm-dd
+   * @returns {string}
+   */
+  getFormatDate() {
+    let date = new Date();
+    return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
   }
 
 };

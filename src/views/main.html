@@ -12,10 +12,15 @@
     <br/>
     <span class="model-value">
         <i data-ng-click="show_input=true" data-ng-hide="show_input">{{model.evaluation.value}}</i>
-        <input type="number" data-ng-show="show_input" data-ng-model="model.evaluation.value" data-ng-blur="show_input=false; Main.updateEvaluation(model.id, model.evaluation.value)"/>
+        <input type="number"
+               data-ng-show="show_input"
+               data-ng-model="model.evaluation.value"
+               data-ng-blur="show_input=false; Main.updateEvaluation(model)"
+               data-ng-focus="Main.saveEvalValue(model.evaluation.value)"
+        />
     </span>
     <br/>
-    {{model.name}}
+    {{model.shortName ? model.shortName : model.name}}
     <br/>
   </div>
 </script>
@@ -46,7 +51,7 @@
             <textarea class="form-control" placeholder="Enter description" rows="7" data-ng-model="model.dscr">{{model.dscr}}</textarea>
           </div>
           <div class="form-group">
-            <input type="button" class="form-control" data-ng-click="Main.updateDscr(model.id, model.dscr)" value="Save dscr"/>
+            <input type="button" class="form-control" data-ng-click="Main.updateDscr(model)" value="Save dscr"/>
           </div>
         </div>
       </div>
