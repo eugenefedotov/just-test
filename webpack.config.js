@@ -53,6 +53,6 @@ module.exports = {
     contentBase: "./src",
     noInfo: false,
     hot: true,
-    port: 3000
+    port: 80
   }
 };
