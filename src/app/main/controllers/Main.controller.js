@@ -9,8 +9,9 @@ export default class MainCtrl {
    * @param $scope
    * @param $sharedService Shared Service
    * @param $alertService Alert Service using ngToast
+   * @param $state state provider
    */
-  constructor($auth, $just, $scope, $sharedService, $alertService) {
+  constructor($auth, $just, $scope, $sharedService, $alertService, $state) {
 
     $auth.authorization();
 
@@ -18,8 +19,9 @@ export default class MainCtrl {
     this.$scope = $scope;
     this.$sharedService = $sharedService;
     this.$alertService = $alertService;
-    this.oldEvalVal = 1;
+    this.$state = $state;
 
+    this.oldEvalVal = 1;
     this.inputData = '';
     this.models = [];
 
@@ -87,8 +89,10 @@ export default class MainCtrl {
       .insert(JSON.parse(this.inputData))
       .then(res => {
         this.$alertService.success('New model created');
+        this.$state.reload();
         this.$scope.$apply();
       });
+
   }
 
   /**

@@ -4,7 +4,7 @@
   "description": "starter project with webpack, angular, es6 and bootstrap",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --host 0.0.0.0 --port 80",
     "bundle": "webpack && cp src/index.html build/"
   },
   "repository": {

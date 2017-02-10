@@ -52,7 +52,6 @@ module.exports = {
   devServer: {
     contentBase: "./src",
     noInfo: false,
-    hot: true,
-    port: 80
+    hot: true
   }
 };
