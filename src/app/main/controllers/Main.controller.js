@@ -31,6 +31,8 @@ export default class MainCtrl {
         if (!res) {
           return;
         }
+        /*console.log(res);
+        return;*/
         this.prepareData(res);
         this.$scope.$digest();
       });
@@ -51,10 +53,12 @@ export default class MainCtrl {
       });
 
       for (let key in parents) {
+        console.log(key, parents[key]);
         let innerItem = parents[key];
         let names = key.split('.');
         let name = names.pop();
         let path = names.join('.');
+        console.log(path);
         if (path) {
           innerItem.shortName = name;
           innerItem.id = item._id;
@@ -84,9 +88,63 @@ export default class MainCtrl {
    */
   createModel() {
 
+    let tmp = this.inputData.split('\n');
+    let data = {
+      name: '',
+      source: '',
+      models: [],
+      dscr: ''
+    };
+
+    if(tmp.length) {
+
+      data.source = this.inputData;
+
+      let evalObj = {
+        date: this.$sharedService.getFormatDate(),
+        value: 1,
+        evaluations: []
+      };
+
+      let oneChildName = '';
+      let doubleChildName = '';
+
+      tmp.forEach(item => {
+
+        item = item.trim();
+        let firstSybols = item.substr(0, 3);
+
+        switch (firstSybols.split('-').length - 1) {
+          case 0:
+            data.name = item;
+            break;
+          case 1:
+            oneChildName = item.substr(1).trim();
+            data.models.push({
+              name       : oneChildName,
+              evaluation : evalObj
+            });
+            break;
+          case 2:
+            doubleChildName = oneChildName + '.' + item.substr(2).trim();
+            data.models.push({
+              name       : doubleChildName,
+              evaluation : evalObj
+            });
+            break;
+          case 3:
+            data.models.push({
+              name       : doubleChildName + '.' + item.substr(3).trim(),
+              evaluation : evalObj
+            });
+            break;
+        }
+      });
+    }
+
     /* need to add json schema validator */
     this.$just.mgoInterface
-      .insert(JSON.parse(this.inputData))
+      .insert(data)
       .then(res => {
         this.$alertService.success('New model created');
         this.$state.reload();
@@ -124,6 +182,10 @@ export default class MainCtrl {
    * @param {Object} model
    */
   updateEvaluation(model) {
+
+    if(this.oldEvalVal === model.evaluation.value) {
+      return;
+    }
 
     let model_id  = model.id;
     let oldEvaluation = {

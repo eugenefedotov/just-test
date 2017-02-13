@@ -1,7 +1,7 @@
 'use strict';
 
 export default function routesConfig($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('');
 
   $stateProvider
     .state('app', {
