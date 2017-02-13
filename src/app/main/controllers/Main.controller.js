@@ -35,6 +35,7 @@ export default class MainCtrl {
         return;*/
         this.prepareData(res);
         this.$scope.$digest();
+        console.log(this.models);
       });
   }
 
@@ -53,12 +54,10 @@ export default class MainCtrl {
       });
 
       for (let key in parents) {
-        console.log(key, parents[key]);
         let innerItem = parents[key];
         let names = key.split('.');
         let name = names.pop();
         let path = names.join('.');
-        console.log(path);
         if (path) {
           innerItem.shortName = name;
           innerItem.id = item._id;
@@ -187,16 +186,20 @@ export default class MainCtrl {
       return;
     }
 
+    let currentDate = this.$sharedService.getFormatDate();
     let model_id  = model.id;
+
+    model.evaluation.evaluations = _.reject(model.evaluation.evaluations, ['date', currentDate]);
+
     let oldEvaluation = {
-      date: model.evaluation.date,
-      value: this.oldEvalVal
+      date  : model.evaluation.date,
+      value : this.oldEvalVal
     };
 
     delete(model.id);
     delete(model.shortName);
 
-    model.evaluation.date = this.$sharedService.getFormatDate();
+    model.evaluation.date = currentDate;
     model.evaluation.evaluations.push(oldEvaluation);
 
     if(model.evaluation.value > 10) {
