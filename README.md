@@ -1,4 +1,4 @@
-# Angular + Webpack Minimal Development Environment (ES6) + Just
+# Angular + Webpack Minimal Development Environment (ES6) + Docker + Just
 
 ### How to run:
 1. clone the project
